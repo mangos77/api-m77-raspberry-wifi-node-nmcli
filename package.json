@@ -1,0 +1,44 @@
+{
+  "name": "api-m77-raspberry-wifi-node-nmcli",
+  "version": "1.0.0",
+  "description": "API to interact with the functionality of the m77-raspberry-wifi-node-nmcli module",
+  "main": "src/index.js",
+  "scripts": {
+    "dev": "PORT=8081 NODE_ENV=development node src/index",
+    "dev:pm2": "PORT=8081 NODE_ENV=development pm2 start src/index.js --name api-m77-raspberry-wifi-node-nmcli-dev -i 2 --watch true --restart-delay 10 --max-restarts 20 && pm2 save",
+    "start": "PORT=8080 NODE_ENV=production node src/index",
+    "start:pm2": "PORT=8080 NODE_ENV=production pm2 start src/index.js --name api-m77-raspberry-wifi-node-nmcli -i 2  --restart-delay 10 --max-restarts 20 && pm2 save"
+  },
+  "keywords": [
+    "wifi",
+    "wifi connection",
+    "nmcli",
+    "raspberry",
+    "raspberry Pi",
+    "node",
+    "nodejs",
+    "node.js",
+    "rpi",
+    "raspi",
+    "linux",
+    "m77-raspberry-wifi-node-nmcli"
+  ],
+  "author": "Ing. Carlos Yerena - mangos77",
+  "homepage": "https://github.com/mangos77/api-m77-raspberry-wifi-node-nmcli",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mangos77/api-m77-raspberry-wifi-node-nmcli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mangos77/api-m77-raspberry-wifi-node-nmcli/issues"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "m77-raspberry-wifi-node-nmcli": "^1.1.2"
+  },
+  "devDependencies": {
+    "morgan": "^1.10.0"
+  }
+}
