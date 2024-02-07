@@ -10,7 +10,7 @@ class Controller {
         this.#wifi = new M77RaspberryWIFI()
     }
 
-    init = async(options = {}) => {
+    init = async (options = {}) => {
         return new Promise(async (resolve, reject) => {
             const result = await this.#wifi.init(options)
             resolve(result)
@@ -35,9 +35,7 @@ class Controller {
     }
 
     removeNetwork = async (req, res) => {
-        const ssid = req.query.ssid.trim()
-        if(ssid.length < 1) 
-            return res.json({ success: false, msg: 'ssid value is required'})
+        const ssid = req.query.ssid ? req.query.ssid.trim() : ''
         const result = await this.#wifi.removeNetwork(ssid)
         res.json(result)
     }
@@ -53,13 +51,13 @@ class Controller {
     }
 
     connect = async (req, res) => {
-        const config_net = {...{}, ...req.body}
+        const config_net = { ...{}, ...req.body }
         const result = await this.#wifi.connect(config_net)
         res.json(result)
     }
 
     reconnect = async (req, res) => {
-        const config_net = {...{}, ...req.body}
+        const config_net = { ...{}, ...req.body }
         const result = await this.#wifi.reconnect(config_net)
         res.json(result)
     }
