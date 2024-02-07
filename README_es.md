@@ -195,6 +195,37 @@ Pero puedes solucionarlo con:
 - Puedes crear una redirección proxy con [NGINX](https://www.nginx.com/)
 
 
+### Códigos de respuesta
+
+Esta es la lista de todos los códigos de respuesta y a qué función están asociados, si es un código de error (de cualquier forma en las respuestas el valor de ***success*** indica si fue satisfactoria o es un error).
+
+Esto puede servir para poder adaptar los textos de respuesta como se requiera en desarrollos y/o traducirlos en la implementación.
+
+|  Código  | Err | Función           | Descripción |
+|:------:|:---:|:-------------------|:------------|
+| 1001 |   | list_interfaces     | Wi-Fi interfaces found on the system
+| 2001 | X | list_interfaces     | There are no Wi-Fi interfaces in the system
+| 1011 |   | status              | Got interface status
+| 2011 | X | status              | Failed to get the status of interface
+| 1021 |   | saved_networks      | List of saved Wi-Fi networks
+| 2021 | X | saved_networks      | It was not possible to obtain the list of saved Wi-Fi networks in inteface
+| 1031 |   | scan                | List of scanned Wi-Fi networks was obtained
+| 2031 |   | scan                | It was not possible to obtain the list of the scanned Wi-Fi networks in inteface
+| 1041 |   | remove_all_networks | All Wi-Fi networks removed
+| 1051 |   | remove_network      | Wi-Fi network has been removed on the system
+| 2051 | X | remove_network      | Wi-Fi network is not in saved networks
+| 1061 |   | connect             | The Wi-Fi network has been successfully configured on interface
+| 2061 | X | connect             | Could not connect to SSID on interface
+| 1071 |   | reconnect           | The Wi-Fi network has been successfully reconnected on interface
+| 2071 | X | reconnect           | Could not reconnect to SSID on interface, because the Wi-Fi network is not in those previously saved in the system
+| 1091 |   | disconnect          | You have been disconnected from the Wi-Fi network
+| 2091 | X | disconnect          | There is no connection established to disconnect
+| 2092 | X | disconnect          | It was not possible to disconnect from the network
+| 2093 | X | disconnect          | An error occurred when obtaining the data of the connected Wi-Fi network to be able to disconnect
+| 1101 |   | init                | Interface has been found on the system
+| 2101 | X | init                | The interface does not exist. Please execute the listInterfaces() method to get the list of available Wifi interfaces and set in init() method
+
+
 ---
 > Espero les sea de ayuda y por favor díganme sobre cualquier error o comentario :-)
 
