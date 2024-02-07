@@ -23,7 +23,7 @@ class Controller {
     }
 
     status = async (req, res) => {
-        const withConnectionInfo = Boolean(req.query.withConnectionInfo)
+        const withConnectionInfo = req.query.withConnectionInfo === "true"? true: false
         const result = await this.#wifi.status(withConnectionInfo)
         res.json(result)
     }
