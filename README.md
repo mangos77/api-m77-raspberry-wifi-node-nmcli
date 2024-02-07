@@ -10,7 +10,7 @@
 > **In current versions of Raspberry OS wpa_cli is no longer used, instead all network configuration is done through nmcli. For this reason the package ***m77-raspberry-wifi-node*** is no longer used*, therefore the package ***api-m77-raspberry-wifi-node*** is not used* either*
   
 
-**node.js** server with **express** that creates an API with the functionalities of the module [**m77-raspberry-wifi-node-nmcli**](https://github.com/mangos77/m77 -raspberry-wifi-node-nmcli), with which you can configure the Wi-Fi network of **Raspberry Pi** that uses **nmcli**.
+**node.js** server with **express** that creates an API with the functionalities of the module [**m77-raspberry-wifi-node-nmcli**](https://github.com/mangos77/m77-raspberry-wifi-node-nmcli), with which you can configure the Wi-Fi network of **Raspberry Pi** that uses **nmcli**.
 
 For developers who need to create a frontend with the functionalities of the [**m77-raspberry-wifi-node-nmcli**](https://github.com/mangos77/m77-raspberry-wifi-node-nmcli) module, it will be much easier to implement it as a backend.
 
@@ -22,7 +22,7 @@ As with my previous contributions. Because I have benefited a lot from the work 
 I hope you find it very useful and recommend it so that it reaches more developers :-)
 
 
-## Instalar
+## Install
 From git
 ```
 git clone https://github.com/mangos77/api-m77-raspberry-wifi-node.git
