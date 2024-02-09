@@ -25,5 +25,5 @@ const config = () => {
         return Object.assign({}, config_dev, config_prod)
     else
         return config_dev
-}
+} 
 module.exports = config()
