@@ -238,7 +238,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"ssid\": \"mangos77\",\n    \"psk\": \"ABCDE12345\",\n    \"bssid\": \"\",\n    \"hidden\": false,\n    \"timeout\": 30\n}"
+					"raw": "{\n    \"ssid\": \"mangos77\",\n    \"psk\": \"ABCDE12345\",\n    \"bssid\": \"48:22:54:9E:4A:C7\",\n    \"ipaddress\": \"192.168.68.79\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.68.1\",\n    \"dns\": [\"8.8.8.8\", \"8.8.4.4\"],\n    \"hidden\": false,\n    \"timeout\": 30\n}"
 				},
 				"url": {
 					"raw": "{{host}}/api/wifi/connect?device=wlan0&debugLevel=0",
