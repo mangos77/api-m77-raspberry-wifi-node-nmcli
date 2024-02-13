@@ -51,6 +51,7 @@ Existen dos bloques para configurar dependiendo si la ejecución es de desarroll
 const config = () => {
     const config_dev = {}
     const config_prod = {}
+}
 ```
 
 Si se ejecuta en modo producción, se toma la variable de entorno ***NODE_ENV=production*** ***config_prod sobre escribirá los valores de config_dev***
@@ -143,6 +144,10 @@ Establece conexión con una red Wifi
     "ssid": "mangos77",
     "psk": "ABCDE12345",
     "bssid": "",
+    "ipaddress": "192.168.1.50",
+    "netmask": "255.255.255.0",
+    "gateway": "192.168.1.1",
+    "dns": ["8.8.8.8", "192.168.1.1"],
     "hidden": false,
     "timeout": 30
 }
@@ -150,9 +155,14 @@ Establece conexión con una red Wifi
 - *ssid* - **(Requerido)** El ssid de la red a la que se desea conectar
 - *psk* - **(Requerido)** Contraseña de la red. **Cadena vacía si se trata de una red abierta**
 - *bssid* - **(Opcional)** Se usa para fijar la conexión a un bssid del ssid, uno de sus usos es cuando el mismo ssid está en más de una banda
+- *ipaddress* - **(Opcional)** Establecer de forma estática la dirección ip de la conexión (*)
+- *netmask* - **(Opcional)** Establecer de forma estática la máscara de red (*)
+- *gateway* - **(Opcional)** Establecer de forma estática la pasarela (*)
+- *dns* - **(Opcional)** Establecer de forma estática los DNS de la conexión, estas deben estar en un arreglo (*)
 - *hidden* - **(Opcional)** Definir si se trata de una red oculta
 - *timeout* - **(Opcional)** Definir tiempo máximo en segundos de espera de conexión - *Por defecto 60*
 
+> Si se desea establecer de forma estática ipaddress, netmask, gateway o dns; todos estos los parámteros son requeridos
 ___
 
 ### PUT /api/wifi/reconnect
@@ -216,6 +226,11 @@ Esto puede servir para poder adaptar los textos de respuesta como se requiera en
 | 2051 | X | remove_network      | Wi-Fi network is not in saved networks
 | 1061 |   | connect             | The Wi-Fi network has been successfully configured on interface
 | 2061 | X | connect             | Could not connect to SSID on interface
+| 2062 | X | connect             | The static ipaddress is not valid
+| 2063 | X | connect             | The static netmask is not valid
+| 2064 | X | connect             | The static gateway is not valid
+| 2065 | X | connect             | One or more static dns are not valid
+| 2066 | X | connect             | To set a custom address parameters; ipaddress, netmask, gateway and dns are required
 | 1071 |   | reconnect           | The Wi-Fi network has been successfully reconnected on interface
 | 2071 | X | reconnect           | Could not reconnect to SSID on interface, because the Wi-Fi network is not in those previously saved in the system
 | 1091 |   | disconnect          | You have been disconnected from the Wi-Fi network

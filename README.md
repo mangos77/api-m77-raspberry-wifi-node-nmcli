@@ -56,6 +56,7 @@ There are two blocks to configure depending on whether the execution is developm
 const config = () => {
     const config_dev = {}
     const config_prod = {}
+}
 ```
 
 If running in production mode, the environment variable ***NODE_ENV=production*** is taken ***config_prod will overwrite the values ​​of config_dev***
@@ -148,6 +149,10 @@ Establish connection with a Wi-Fi network
     "ssid": "mangos77",
     "psk": "ABCDE12345",
     "bssid": "",
+    "ipaddress": "192.168.1.50",
+    "netmask": "255.255.255.0",
+    "gateway": "192.168.1.1",
+    "dns": ["8.8.8.8", "192.168.1.1"],
     "hidden": false,
     "timeout": 30
 }
@@ -155,8 +160,14 @@ Establish connection with a Wi-Fi network
 - *ssid* - **(Required)** The ssid of the network you want to connect to
 - *psk* - **(Required)** Network password. **Empty string if this is an open network**
 - *bssid* - **(Optional)** Used to set the connection to a bssid of the ssid, one of its uses is when the same ssid is in more than one band
+- *ipaddress* - **(Optional)** Statically establish the IP address of the connection (*)
+- *netmask* - **(Optional)** Statically set the netmask (*)
+- *gateway* - **(Optional)** Statically establish the gateway (*)
+- *dns* - **(Optional)** Statically establish the DNS of the connection, these must be in an array (*)
 - *hidden* - **(Optional)** Define if it is a hidden network
 - *timeout* - **(Optional)** Define maximum connection waiting time in seconds - *Default 60*
+
+> If you want to statically set ipaddress, netmask, gateway or dns; all of these parameters are required
 
 ___
 
@@ -220,6 +231,11 @@ This can be used to adapt the response texts as required in developments and/or 
 | 2051 | X | remove_network      | Wi-Fi network is not in saved networks
 | 1061 |   | connect             | The Wi-Fi network has been successfully configured on interface
 | 2061 | X | connect             | Could not connect to SSID on interface
+| 2062 | X | connect             | The static ipaddress is not valid
+| 2063 | X | connect             | The static netmask is not valid
+| 2064 | X | connect             | The static gateway is not valid
+| 2065 | X | connect             | One or more static dns are not valid
+| 2066 | X | connect             | To set a custom address parameters; ipaddress, netmask, gateway and dns are required
 | 1071 |   | reconnect           | The Wi-Fi network has been successfully reconnected on interface
 | 2071 | X | reconnect           | Could not reconnect to SSID on interface, because the Wi-Fi network is not in those previously saved in the system
 | 1091 |   | disconnect          | You have been disconnected from the Wi-Fi network
@@ -228,7 +244,6 @@ This can be used to adapt the response texts as required in developments and/or 
 | 2093 | X | disconnect          | An error occurred when obtaining the data of the connected Wi-Fi network to be able to disconnect
 | 1101 |   | init                | Interface has been found on the system
 | 2101 | X | init                | The interface does not exist. Please execute the listInterfaces() method to get the list of available Wifi interfaces and set in init() method
-
 
 ---
 > I hope it helps you and please tell me about any errors or comments :-)
