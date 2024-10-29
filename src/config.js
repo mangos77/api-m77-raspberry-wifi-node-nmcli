@@ -9,7 +9,7 @@ const config = () => {
         version: pkjson.version,
         production: false,
         port: process.env.PORT || 8081,
-        allowHosts: ['localhost', '127.0.0.1', 'iface=eth0'],
+        allowHosts: ['localhost', '127.0.0.1', 'iface=eth0', 'm77panel.local'],
         wifi_config: { debugLevel: 2 }
     }
 
