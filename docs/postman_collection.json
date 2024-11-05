@@ -7,342 +7,453 @@
 	},
 	"item": [
 		{
-			"name": "/api/wifi/list_interfaces",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/wifi/list_interfaces",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"list_interfaces"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/wifi/status",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/wifi/status?device=wlan0&debugLevel=0&withConnectionInfo=true",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"status"
-					],
-					"query": [
-						{
-							"key": "device",
-							"value": "wlan0",
-							"description": "by default wlan0"
-						},
-						{
-							"key": "debugLevel",
-							"value": "0",
-							"description": "by default 2"
-						},
-						{
-							"key": "withConnectionInfo",
-							"value": "true",
-							"description": "by fefault false"
+			"name": "WiFi",
+			"item": [
+				{
+					"name": "/api/wifi/list_interfaces",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wifi/list_interfaces",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"list_interfaces"
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/wifi/saved_networks",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/wifi/saved_networks?device=wlan0&debugLevel=2",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"saved_networks"
-					],
-					"query": [
-						{
-							"key": "device",
-							"value": "wlan0",
-							"description": "by default wlan0"
-						},
-						{
-							"key": "debugLevel",
-							"value": "2",
-							"description": "by default 2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/wifi/scan",
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/wifi/scan?device=wlan0&debugLevel=2",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"scan"
-					],
-					"query": [
-						{
-							"key": "device",
-							"value": "wlan0",
-							"description": "by default wlan0"
-						},
-						{
-							"key": "debugLevel",
-							"value": "2",
-							"description": "by default 2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/wifi/remove_all_networks",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/wifi/remove_all_networks?device=wlan0&debugLevel=0",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"remove_all_networks"
-					],
-					"query": [
-						{
-							"key": "device",
-							"value": "wlan0",
-							"description": "by default wlan0"
-						},
-						{
-							"key": "debugLevel",
-							"value": "0",
-							"description": "by default 2"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/wifi/remove_network",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/wifi/remove_network?device=wlan0&debugLevel=0&ssid=mangos77",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"remove_network"
-					],
-					"query": [
-						{
-							"key": "device",
-							"value": "wlan0",
-							"description": "by default wlan0"
-						},
-						{
-							"key": "debugLevel",
-							"value": "0",
-							"description": "by default 2"
-						},
-						{
-							"key": "ssid",
-							"value": "mangos77"
-						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/wifi/connect",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"ssid\": \"mangos77\",\n    \"psk\": \"ABCDE12345\",\n    \"bssid\": \"48:22:54:9E:4A:C7\",\n    \"ipaddress\": \"192.168.68.79\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.68.1\",\n    \"dns\": [\"8.8.8.8\", \"8.8.4.4\"],\n    \"hidden\": false,\n    \"timeout\": 30\n}"
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{host}}/api/wifi/connect?device=wlan0&debugLevel=0",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"connect"
-					],
-					"query": [
-						{
-							"key": "device",
-							"value": "wlan0",
-							"description": "by default wlan0"
-						},
-						{
-							"key": "debugLevel",
-							"value": "0",
-							"description": "by default 2"
+				{
+					"name": "/api/wifi/status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wifi/status?device=wlan0&debugLevel=1&withConnectionInfo=true",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"status"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "1",
+									"description": "by default 2"
+								},
+								{
+									"key": "withConnectionInfo",
+									"value": "true",
+									"description": "by fefault false"
+								}
+							]
 						}
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "/api/wifi/reconnect",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"ssid\": \"mangos77\",\n    \"timeout\": 30\n}"
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "{{host}}/api/wifi/reconnect?device=wlan0&debugLevel=0",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"reconnect"
-					],
-					"query": [
-						{
-							"key": "device",
-							"value": "wlan0",
-							"description": "by default wlan0"
-						},
-						{
-							"key": "debugLevel",
-							"value": "0",
-							"description": "by default 2"
+				{
+					"name": "/api/wifi/saved_networks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wifi/saved_networks?device=wlan0&debugLevel=2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"saved_networks"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "2",
+									"description": "by default 2"
+								}
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "/api/wifi/scan",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wifi/scan?device=wlan0&debugLevel=2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"scan"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "2",
+									"description": "by default 2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/wifi/remove_all_networks",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wifi/remove_all_networks?device=wlan0&debugLevel=0",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"remove_all_networks"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "0",
+									"description": "by default 2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/wifi/remove_network",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wifi/remove_network?device=wlan0&debugLevel=0&ssid=mangos77_inv",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"remove_network"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "0",
+									"description": "by default 2"
+								},
+								{
+									"key": "ssid",
+									"value": "mangos77_inv"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/wifi/connect",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ssid\": \"mangos77\",\n    \"psk\": \"ABCDE12345\",\n    \"bssid\": \"4A:22:b3:9D:3D:C7\",\n    \"ipaddress\": \"192.168.68.202\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.68.1\",\n    \"dns\": [\"8.8.4.4\", \"8.8.8.8\"],\n    \"hidden\": false,\n    \"timeout\": 30\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/wifi/connect?device=wlan0&debugLevel=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"connect"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "1",
+									"description": "by default 2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/wifi/reconnect",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ssid\": \"mangos77\",\n    \"timeout\": 30\n}"
+						},
+						"url": {
+							"raw": "{{host}}/api/wifi/reconnect?device=wlan0&debugLevel=2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"reconnect"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "2",
+									"description": "by default 2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/wifi/disconnect",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/wifi/disconnect?device=wlan0&debugLevel=2",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"disconnect"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "2",
+									"description": "by default 2"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		},
 		{
-			"name": "/api/wifi/disconnect",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"url": {
-					"raw": "{{host}}/api/wifi/disconnect?device=wlan0&debugLevel=0",
-					"host": [
-						"{{host}}"
-					],
-					"path": [
-						"api",
-						"wifi",
-						"disconnect"
-					],
-					"query": [
-						{
-							"key": "device",
-							"value": "wlan0",
-							"description": "by default wlan0"
-						},
-						{
-							"key": "debugLevel",
-							"value": "0",
-							"description": "by default 2"
+			"name": "Ethernet",
+			"item": [
+				{
+					"name": "/api/ethernet/list_interfaces",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/ethernet/list_interfaces",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"ethernet",
+								"list_interfaces"
+							]
 						}
-					]
+					},
+					"response": []
+				},
+				{
+					"name": "/api/ethernet/status",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{host}}/api/ethernet/status?device=eth0&debugLevel=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"ethernet",
+								"status"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "eth0",
+									"description": "by default wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "1",
+									"description": "by default 2"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "/api/ethernet/set_onnection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ipaddress\": \"192.168.68.181\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.255.1\",\n    \"dns\": [\"8.8.4.4\", \"8.8.8.8\"],\n    \"timeout\": 5\n}\n\n"
+						},
+						"url": {
+							"raw": "{{host}}/api/ethernet/set_onnection?device=eth0&debugLevel=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"ethernet",
+								"set_onnection"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "eth0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			]
 		}
 	],
 	"event": [

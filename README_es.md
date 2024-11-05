@@ -84,7 +84,7 @@ const config_prod = {
 En la carpeta docs encontrarás *postman_collection.json*: Colección Postman para ser importada y usada
 
 
-## Endpoints
+## Endpoints WiFi
 Los endpoints disponibles son:
 ___
 
@@ -184,6 +184,44 @@ ___
 Desconecta la Wifi que está conectada al dispositivo
 
 
+## Endpoints Ethernet
+
+### GET /api/ethernet/list_interfaces
+Enlista las interfaces ethernet disponibles
+
+- No requiere parámetros
+
+---
+
+
+### GET /api/ethernet/status
+Estatus del la interfaz ethernet
+
+- No requiere parámetros
+---
+
+
+### POST /api/ethernet/set_onnection
+Fijar los parámetros de conexión ethernet
+
+- Requiere envío de datos en el body de la petición:
+```
+{
+    "ipaddress": "192.168.1.50",
+    "netmask": "255.255.255.0",
+    "gateway": "192.168.1.1",
+    "dns": ["8.8.8.8", "192.168.1.1"],
+    "timeout": 30
+}
+```
+- *ipaddress* - **(Opcional)** Establecer de forma estática la dirección ip de la conexión (*)
+- *netmask* - **(Opcional)** Establecer de forma estática la máscara de red (*)
+- *gateway* - **(Opcional)** Establecer de forma estática la pasarela (*)
+- *dns* - **(Opcional)** Establecer de forma estática los DNS de la conexión, estas deben estar en un arreglo (*)
+- *timeout* - **(Opcional)** Definir tiempo máximo en segundos de espera de conexión - *Por defecto 60*
+
+> Si se desea establecer de forma estática ipaddress, netmask, gateway o dns; todos estos los parámteros son requeridos
+___
 
 
 # Información extra
@@ -205,7 +243,7 @@ Pero puedes solucionarlo con:
 - Puedes crear una redirección proxy con [NGINX](https://www.nginx.com/)
 
 
-### Códigos de respuesta
+### Códigos de respuesta WiFi
 
 Esta es la lista de todos los códigos de respuesta y a qué función están asociados, si es un código de error (de cualquier forma en las respuestas el valor de ***success*** indica si fue satisfactoria o es un error).
 
@@ -240,6 +278,26 @@ Esto puede servir para poder adaptar los textos de respuesta como se requiera en
 | 1101 |   | init                | Interface has been found on the system
 | 2101 | X | init                | The interface does not exist. Please execute the listInterfaces() method to get the list of available Wifi interfaces and set in init() method
 
+
+### Códigos de respuesta ethernet
+
+
+|  Código  | Err | Función           | Descripción |
+|:------:|:---:|:----------------|:------------|
+| 1002 |   | list_interfaces     | Ethernet interfaces found on the system
+| 2001 | X | list_interfaces     | There are no ethernet interfaces in the system
+| 1012 |   | status              | Got ethernet interface status
+| 2013 | X | status              | Failed to get the status of ethernet interface
+| 1062 |   | setConnection       | The ethernet interface has been successfully configured
+| 2067 | X | setConnection       | Ethernet interface cable is not plugged in
+| 2068 | X | setConnection       | Could not connect to ethernet interface
+| 2062 | X | setConnection       | The static ipaddress is not valid
+| 2063 | X | setConnection       | The static netmask is not valid
+| 2064 | X | setConnection       | The static gateway is not valid
+| 2065 | X | setConnection       | One or more static dns are not valid
+| 2066 | X | setConnection       | To set a custom address parameters; ipaddress, netmask, gateway and dns are required
+| 1102 |   | init                | Ethernet interface has been found on the system
+| 2102 | X | init                | The ethernet interface does not exist. Please execute the listInterfaces() method to get the list of available ethernet interfaces and set in init() method
 
 ---
 > Espero les sea de ayuda y por favor díganme sobre cualquier error o comentario :-)
