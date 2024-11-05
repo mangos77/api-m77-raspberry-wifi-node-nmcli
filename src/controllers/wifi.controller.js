@@ -6,7 +6,7 @@ class Controller {
     #wifi = null
     #options = {}
     constructor() {
-        const M77RaspberryWIFI = require('m77-raspberry-wifi-node-nmcli')
+        const { M77RaspberryWIFI } = require('m77-raspberry-wifi-node-nmcli')
         this.#wifi = new M77RaspberryWIFI()
     }
 
@@ -23,7 +23,7 @@ class Controller {
     }
 
     status = async (req, res) => {
-        const withConnectionInfo = req.query.withConnectionInfo === "true"? true: false
+        const withConnectionInfo = req.query.withConnectionInfo === "true" ? true : false
         const result = await this.#wifi.status(withConnectionInfo)
         res.json(result)
     }
