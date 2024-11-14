@@ -207,7 +207,7 @@ Status de la interfaz Ethernet
 ---
 
 
-### POST /api/ethernet/set_onnection
+### POST /api/ethernet/set_connection
 Set the Ethernet connection parameters
 
 - Requires sending data in the request body:

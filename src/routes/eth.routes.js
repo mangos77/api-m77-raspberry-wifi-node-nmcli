@@ -26,7 +26,7 @@ router.get('/list_interfaces', controller.listInterfaces)
 router.get('/status', md_options, controller.status)
 
 // Set connection params
-router.post('/set_onnection', md_options, controller.setConnection)
+router.post('/set_connection', md_options, controller.setConnection)
 
 
 module.exports = router;

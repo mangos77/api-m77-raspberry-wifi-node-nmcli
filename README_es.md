@@ -201,7 +201,7 @@ Estatus del la interfaz ethernet
 ---
 
 
-### POST /api/ethernet/set_onnection
+### POST /api/ethernet/set_connection
 Fijar los parámetros de conexión ethernet
 
 - Requiere envío de datos en el body de la petición:
