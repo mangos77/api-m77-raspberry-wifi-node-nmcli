@@ -48,6 +48,7 @@ router.put('/disconnect', md_options, controller.disconnect)
 // Reconnect
 router.put('/reconnect', md_options, controller.reconnect)
 
-
+// Set connection params
+router.post('/set_connection', md_options, controller.setConnection)
 
 module.exports = router;

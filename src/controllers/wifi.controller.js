@@ -67,7 +67,11 @@ class Controller {
         res.json(result)
     }
 
-
+    setConnection = async (req, res) => {
+        const config_net = { ...{}, ...req.body }
+        const result = await this.#wifi.setConnection(config_net)
+        res.json(result)
+    }
 }
 
 module.exports = Controller
