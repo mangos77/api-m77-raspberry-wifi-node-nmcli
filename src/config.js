@@ -16,7 +16,7 @@ const config = () => {
     const config_prod = {
         production: true,
         port: process.env.PORT || 8080,
-        allowHosts: ['localhost', '127.0.0.1'],
+        allowHosts: ['localhost', '127.0.0.1', 'iface=lo'],
         wifi_config: { debugLevel: 0 }
     }
 
