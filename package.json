@@ -1,6 +1,6 @@
 {
   "name": "api-m77-raspberry-wifi-node-nmcli",
-  "version": "1.4.10",
+  "version": "1.4.11",
   "description": "API to interact with the functionality of the m77-raspberry-wifi-node-nmcli module",
   "main": "src/index.js",
   "scripts": {
