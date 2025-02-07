@@ -88,7 +88,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/wifi/saved_networks?device=wlan0&debugLevel=2",
+							"raw": "{{host}}/api/wifi/saved_networks?device=wlan0&debugLevel=2&exclude=m77ap,wlan0_ap",
 							"host": [
 								"{{host}}"
 							],
@@ -107,6 +107,11 @@
 									"key": "debugLevel",
 									"value": "2",
 									"description": "by default 2"
+								},
+								{
+									"key": "exclude",
+									"value": "m77ap,wlan0_ap",
+									"description": "Words to exclude in device or SSID. ex. \"word,to,explude\""
 								}
 							]
 						}
@@ -199,7 +204,7 @@
 							}
 						],
 						"url": {
-							"raw": "{{host}}/api/wifi/remove_network?device=wlan0&debugLevel=0&ssid=mangos77_inv",
+							"raw": "{{host}}/api/wifi/remove_network?device=wlan0&debugLevel=0&ssid=Carlos Cel",
 							"host": [
 								"{{host}}"
 							],
@@ -221,7 +226,7 @@
 								},
 								{
 									"key": "ssid",
-									"value": "mangos77_inv"
+									"value": "Carlos Cel"
 								}
 							]
 						}
@@ -241,7 +246,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ssid\": \"mangos77\",\n    \"psk\": \"ABCDE12345\",\n    \"bssid\": \"4A:22:b3:9D:3D:C7\",\n    \"ipaddress\": \"192.168.68.202\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.68.1\",\n    \"dns\": [\"8.8.4.4\", \"8.8.8.8\"],\n    \"hidden\": false,\n    \"timeout\": 30\n}"
+							"raw": "{\n    \"ssid\": \"mangos77\",\n    \"psk\": \"Ye4752107159\",\n    \"bssid\": \"48:22:54:9D:4A:C7\",\n    \"ipaddress\": \"192.168.68.202\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.68.1\",\n    \"dns\": [\"8.8.4.4\", \"8.8.8.8\"],\n    \"hidden\": false,\n    \"timeout\": 30\n}"
 						},
 						"url": {
 							"raw": "{{host}}/api/wifi/connect?device=wlan0&debugLevel=1",
@@ -346,6 +351,45 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "/api/wifi/set_connection",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"ipaddress\": \"192.168.68.205\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.68.1\",\n    \"dns\": [\"8.8.4.4\", \"8.8.8.8\"],\n    \"timeout\": 5\n}\n\n"
+						},
+						"url": {
+							"raw": "{{host}}/api/wifi/set_connection?device=wlan0&debugLevel=1",
+							"host": [
+								"{{host}}"
+							],
+							"path": [
+								"api",
+								"wifi",
+								"set_connection"
+							],
+							"query": [
+								{
+									"key": "device",
+									"value": "wlan0"
+								},
+								{
+									"key": "debugLevel",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -415,7 +459,7 @@
 					"response": []
 				},
 				{
-					"name": "/api/ethernet/set_onnection",
+					"name": "/api/ethernet/set_connection",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -427,17 +471,17 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"ipaddress\": \"192.168.68.181\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.255.1\",\n    \"dns\": [\"8.8.4.4\", \"8.8.8.8\"],\n    \"timeout\": 5\n}\n\n"
+							"raw": "{\n    \"ipaddress\": \"192.168.68.181\",\n    \"netmask\": \"255.255.252.0\",\n    \"gateway\": \"192.168.256.1\",\n    \"dns\": [\"8.8.4.4\", \"8.8.8.8\"],\n    \"timeout\": 5\n}\n\n"
 						},
 						"url": {
-							"raw": "{{host}}/api/ethernet/set_onnection?device=eth0&debugLevel=1",
+							"raw": "{{host}}/api/ethernet/set_connection?device=eth0&debugLevel=1",
 							"host": [
 								"{{host}}"
 							],
 							"path": [
 								"api",
 								"ethernet",
-								"set_onnection"
+								"set_connection"
 							],
 							"query": [
 								{
@@ -479,7 +523,7 @@
 	"variable": [
 		{
 			"key": "host",
-			"value": "http://[HOST]:[PORT]",
+			"value": "",
 			"type": "string"
 		}
 	]
