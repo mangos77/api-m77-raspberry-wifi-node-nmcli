@@ -30,7 +30,8 @@ class Controller {
 
 
     savedNetworks = async (req, res) => {
-        const result = await this.#wifi.savedNetworks()
+        const exclude_words_arr = req.query.exclude ? req.query.exclude.split(',').map(word => word.trim()) : []
+        const result = await this.#wifi.savedNetworks(exclude_words_arr)
         res.json(result)
     }
 
