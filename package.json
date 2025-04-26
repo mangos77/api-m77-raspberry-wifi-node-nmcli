@@ -5,7 +5,9 @@
   "main": "src/index.js",
   "scripts": {
     "dev": "PORT=8081 NODE_ENV=development node src/index",
+    "dev:kill": "sudo kill -9 $(sudo lsof -t -i :8081)",
     "dev:pm2": "PORT=8081 NODE_ENV=development pm2 start src/index.js --name api-m77-raspberry-wifi-node-nmcli-dev -i 2 --watch true --restart-delay 10 --max-restarts 20 && pm2 save",
+    "start:kill": "sudo kill -9 $(sudo lsof -t -i :8080)",
     "start": "PORT=8080 NODE_ENV=production node src/index",
     "start:pm2": "PORT=8080 NODE_ENV=production pm2 start src/index.js --name api-m77-raspberry-wifi-node-nmcli -i 2  --restart-delay 10 --max-restarts 20 && pm2 save"
   },
