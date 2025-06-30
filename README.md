@@ -40,12 +40,14 @@ mkdir api-m77-raspberry-wifi-node-nmcli && cd api-m77-raspberry-wifi-node-nmcli 
 It is very simple to configure the package, it will be done in two files:
 
 ### .env / .env.production
+An example of the .env file for development is provided.
+*IMPORTANT*: The list of allowed hosts must be declared without spaces, quotes, or brackets.
 ```
 NODE_ENV=development
 PORT=8081
 NAME=api-m77-raspberry-wifi-node-nmcli-dev
 
-ALLOW_HOSTS=['localhost', '127.0.0.1', 'iface=eth0', 'm77panel.local']
+ALLOW_HOSTS=localhost,127.0.0.1,iface=lo,m77panel.local
 
 DEBUG_LEVEL=2
 ```
