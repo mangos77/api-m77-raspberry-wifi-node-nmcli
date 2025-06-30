@@ -39,51 +39,31 @@ mkdir api-m77-raspberry-wifi-node-nmcli && cd api-m77-raspberry-wifi-node-nmcli 
 ## Set up
 It is very simple to configure the package, it will be done in two files:
 
-### package.json
-It is optional and only to modify the execution scripts to pass environment variables, such as the port for each type of execution:
+### .env / .env.production
 ```
-"scripts": {
-    "dev": "PORT=8081 NODE_ENV=development node src/index",
-    "start": "PORT=8080 NODE_ENV=production node src/index"
-},
-```
+NODE_ENV=development
+PORT=8081
+NAME=api-m77-raspberry-wifi-node-nmcli-dev
 
-### src/config.js
-In this file you will find the configuration of all the operation for the execution of the API
+ALLOW_HOSTS=['localhost', '127.0.0.1', 'iface=eth0', 'm77panel.local']
 
-There are two blocks to configure depending on whether the execution is development or production:
-```
-const config = () => {
-    const config_dev = {}
-    const config_prod = {}
-}
+DEBUG_LEVEL=2
 ```
 
-If running in production mode, the environment variable ***NODE_ENV=production*** is taken ***config_prod will overwrite the values ​​of config_dev***
 
-The values ​​to adjust are:
-- *port*: By default the environment variable PORT is taken, otherwise 8081, but you can set the desired value
-- *allowHosts*: In a simple array that can contain: domain names, IP addresses or iface=[Wifi interface]. This is to provide security by only accepting API calls towards a given url, for example if you only want the API to be accessible from http://127.0.0.1:8081 or http://localhost then the fix should be ['localhost', '127.0.0.1']. In the case of ***iface***, the API will obtain the associated IP address automatically.
-- *wifi_config*: JSON object that will set the default values ​​in the API calls and are based on the parameters of the init() method of [**m77-raspberry-wifi-node-nmcli**](https:/ /github.com/mangos77/m77-raspberry-wifi-node-nmcli) (device, debugLevel)
-
-Example:
+## Run
+The execution scripts for easy use are:
 ```
-const config_dev = {
-    name: pkjson.name,
-    version: pkjson.version,
-    production: false,
-    port: process.env.PORT || 8081,
-    allowHosts: ['localhost', '127.0.0.1', 'iface=eth0'],
-    wifi_config: { debugLevel: 2 }
-}
-
-const config_prod = {
-    production: true,
-    port: process.env.PORT || 8080,
-    allowHosts: ['localhost', '127.0.0.1'],
-    wifi_config: { debugLevel: 0 }
-}
+npm run dev                 # Runs using the .env values for development
+npm run dev:kill            # Kills the development execution process
+npm run dev:pm2             # Runs in development mode using pm2
+npm run dev:pm2_delete      # Stops the pm2 instances of the development execution
+npm run start               # Runs using the .env.production values for production
+npm run start:kill          # Kills the production execution process
+npm run start:pm2           # Runs in production mode using pm2
+npm run start:pm2_delete    # Stops the pm2 instances of the production execution
 ```
+
 
 ## Documentation
 In the docs folder you will find *postman_collection.json*: Postman collection to be imported and used

@@ -20,65 +20,44 @@ Espero que les sea de gran utilidad y la recomienden para que llegue a más desa
 ## Instalar
 Desde git
 ```
-git clone https://github.com/mangos77/api-m77-raspberry-wifi-node.git
-cd api-m77-raspberry-wifi-node
+git clone https://github.com/mangos77/api-m77-raspberry-wifi-node-nmcli.git
+cd api-m77-raspberry-wifi-node-nmcli
 npm install
 ```
 
 Desde npm
 ```
-mkdir api-m77-raspberry-wifi-node-nmcli && cd api-m77-raspberry-wifi-node-nmcli && npm install api-m77-raspberry-wifi-node-nmcli --no-save && mv node_modules/api-m77-raspberry-wifi-node/* ./ && rm -rf node_modules && npm install
+mkdir api-m77-raspberry-wifi-node-nmcli && cd api-m77-raspberry-wifi-node-nmcli && npm install api-m77-raspberry-wifi-node-nmcli --no-save && mv node_modules/api-m77-raspberry-wifi-node-nmcli/* ./ && rm -rf node_modules && npm install
 ```
 
 
 ## Configurar
 Es muy sencillo configurar el paquete, se hará en dos archivos:
 
-### package.json
-Es opcional y sólo para modificar los scripts de ejecución para pasar variables de entorno, comom por ejemplo el puerto para cada tipo de ejecución:
+### .env / .env.production
 ```
-"scripts": {
-    "dev": "PORT=8081 NODE_ENV=development node src/index",
-    "start": "PORT=8080 NODE_ENV=production node src/index"
-},
-```
+NODE_ENV=development
+PORT=8081
+NAME=api-m77-raspberry-wifi-node-nmcli-dev
 
-### src/config.js
-En este archivo se encuentra la configuración de todo el funcionamiento para la ejecución de la API
+ALLOW_HOSTS=['localhost', '127.0.0.1', 'iface=eth0', 'm77panel.local']
 
-Existen dos bloques para configurar dependiendo si la ejecución es de desarrollo o producción:
-```
-const config = () => {
-    const config_dev = {}
-    const config_prod = {}
-}
+DEBUG_LEVEL=2
 ```
 
-Si se ejecuta en modo producción, se toma la variable de entorno ***NODE_ENV=production*** ***config_prod sobre escribirá los valores de config_dev***
-
-Los valores a ajustar son:
-- *port*: Por defecto se toma la variable de entorno PORT, en caso contrario 8081, pero se puede fijar el valor deseado
-- *allowHosts*: En un array simple que puede contener: nombres de dominio, direcciones ip o iface=[interfaz Wifi]. Esto es para dar seguridad aceptando sólo los llamados a la API hacia una url determinada, por ejemplo si sólo se desea que se pueda acceder a la API desde http://127.0.0.1:8081 o http://localhost entonces el arreglo debe ser ['localhost', '127.0.0.1']. El caso de las ***iface*** la API obtendrá la dirección IP asociada de forma automática.
-- *wifi_config*: Objeto JSON que fijará los valores por defecto en los llamados a la API y se basan en los parámetros del método init() de [**m77-raspberry-wifi-node-nmcli**](https://github.com/mangos77/m77-raspberry-wifi-node-nmcli) (device, debugLevel)
-
-Ejemplo:
+## Ejecutar
+Los scripts de ejecución para su fácil uso son:
 ```
-const config_dev = {
-    name: pkjson.name,
-    version: pkjson.version,
-    production: false,
-    port: process.env.PORT || 8081,
-    allowHosts: ['localhost', '127.0.0.1', 'iface=eth0'],
-    wifi_config: { debugLevel: 2 }
-}
-
-const config_prod = {
-    production: true,
-    port: process.env.PORT || 8080,
-    allowHosts: ['localhost', '127.0.0.1'],
-    wifi_config: { debugLevel: 0 }
-}
+npm run dev                 # Ejecuta usando los valores de .env para desarrollo
+npm run dev:kill            # Mata el proceso de ejecución de desarrollo
+npm run dev:pm2             # Ejecuta para desarrollo mediante pm2 
+npm run dev:pm2_delete      # Detiene las instancias de pm2 de la ejecución de desarrollo
+npm run start               # Ejecuta usando los valores de .env.production para producción
+npm run start:kill          # Mata el proceso de ejecución de producción
+npm run start:pm2           # Ejecuta para producción mediante pm2 
+npm run start:pm2_delete    # Detiene las instancias de pm2 de la ejecución de producción
 ```
+
 
 ## Documentación
 En la carpeta docs encontrarás *postman_collection.json*: Colección Postman para ser importada y usada
