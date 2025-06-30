@@ -25,14 +25,14 @@ I hope you find it very useful and recommend it so that it reaches more develope
 ## Install
 From git
 ```
-git clone https://github.com/mangos77/api-m77-raspberry-wifi-node.git
-cd api-m77-raspberry-wifi-node
+git clone https://github.com/mangos77/api-m77-raspberry-wifi-node-nmcli.git
+cd api-m77-raspberry-wifi-node-nmcli
 npm install
 ```
 
 From npm
 ```
-mkdir api-m77-raspberry-wifi-node-nmcli && cd api-m77-raspberry-wifi-node-nmcli && npm install api-m77-raspberry-wifi-node-nmcli --no-save && mv node_modules/api-m77-raspberry-wifi-node/* ./ && rm -rf node_modules && npm install
+mkdir api-m77-raspberry-wifi-node-nmcli && cd api-m77-raspberry-wifi-node-nmcli && npm install api-m77-raspberry-wifi-node-nmcli --no-save && mv node_modules/api-m77-raspberry-wifi-node-nmcli/* ./ && rm -rf node_modules && npm install
 ```
 
 
