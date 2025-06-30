@@ -1,10 +1,23 @@
 global.__basedir = __dirname
 
+const path = require('path')
+
+const dotenv = require('dotenv');
+const parseVariables = require('dotenv-parse-variables');
+dotenv.config({ path: `.env` });
+process.env = parseVariables(process.env)
+
+if(process.env.NODE_ENV == 'production'){
+    let envprod = dotenv.config({ path: '.env.production' });
+    envprod = parseVariables(envprod)
+    process.env = {...process.env, ...envprod}
+}
+
+const config = require(path.join(__basedir, 'config'))
+console.log(config)
 const express = require('express')
 const app = new express()
 
-const path = require('path')
-const config = require(path.join(__basedir, 'config'))
 
 // CORS
 // Habilita cors
