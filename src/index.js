@@ -14,7 +14,7 @@ if(process.env.NODE_ENV == 'production'){
 }
 
 const config = require(path.join(__basedir, 'config'))
-console.log(config)
+
 const express = require('express')
 const app = new express()
 
