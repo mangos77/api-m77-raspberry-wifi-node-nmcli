@@ -23,26 +23,15 @@ const config = () => {
     }
     const localIPs = getLocalIPs()
 
-    const config_dev = {
-        name: pkjson.name,
+    const config = {
+        name: process.env.NAME,
         version: pkjson.version,
-        production: false,
-        port: process.env.PORT || 8081,
-        allowHosts: ['localhost', '127.0.0.1', 'iface=eth0', 'm77panel.local'],
-        wifi_config: { debugLevel: 2 }
+        production: process.env.NODE_ENV === 'production' ? true : false,
+        port: process.env.PORT,
+        allowHosts: process.env.ALLOW_HOSTS.concat(localIPs),
+        wifi_config: { debugLevel: process.env.DEBUG_LEVEL }
     }
 
-    const config_prod = {
-        production: true,
-        port: process.env.PORT || 8080,
-        allowHosts: ['localhost', '127.0.0.1', 'iface=lo', 'm77panel.local'].concat(localIPs),
-        wifi_config: { debugLevel: 0 }
-    }
-
-
-    if (process.env.NODE_ENV === "production")
-        return Object.assign({}, config_dev, config_prod)
-    else
-        return config_dev
+    return config
 }
 module.exports = config()
