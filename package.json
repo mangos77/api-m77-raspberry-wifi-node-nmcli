@@ -1,6 +1,6 @@
 {
   "name": "api-m77-raspberry-wifi-node-nmcli",
-  "version": "1.4.16",
+  "version": "1.4.17",
   "description": "API to interact with the functionality of the m77-raspberry-wifi-node-nmcli module",
   "main": "src/index.js",
   "scripts": {
@@ -10,8 +10,8 @@
     "dev:pm2_delete": "dotenv -e .env -- sh -c 'pm2 delete ${NAME}_${PORT}; pm2 save'",
     "start": "dotenv -e .env.production  -- sh -c 'node --watch src/index'",
     "start:kill": "dotenv -e .env.production -- sh -c 'kill -9 $(lsof -t -i:$PORT)'",
-    "start:pm2": "dotenv -e .env -- sh -c 'npm run start:pm2_delete; npm run start:kill; pm2 start src/index.js --name ${NAME}_${PORT} -i 2 --restart-delay 10 --max-restarts 20 --max-memory-restart 500M && pm2 save'",
-    "start:pm2_delete": "dotenv -e .env -- sh -c 'pm2 delete ${NAME}_${PORT}; pm2 save'"
+    "start:pm2": "dotenv -e .env.production -- sh -c 'npm run start:pm2_delete; npm run start:kill; pm2 start src/index.js --name ${NAME}_${PORT} -i 2 --restart-delay 10 --max-restarts 20 --max-memory-restart 500M && pm2 save'",
+    "start:pm2_delete": "dotenv -e .env.production -- sh -c 'pm2 delete ${NAME}_${PORT}; pm2 save'"
   },
   "keywords": [
     "wifi",
