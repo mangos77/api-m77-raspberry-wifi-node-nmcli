@@ -1,12 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const path = require('path')
-const config = require(path.join(__basedir, 'config'))
+import { Router } from 'express';
+const router = Router();
+import config from '../config.js';
 
 // Import controller
-const Controller = require( path.join(__basedir, 'controllers', 'wifi.controller') )
+import Controller from '../controllers/wifi.controller.js'
 const controller = new Controller()
-
+controller.init()
 
 // Middleware options
 async function md_options(req, res, next){
@@ -51,4 +50,4 @@ router.put('/reconnect', md_options, controller.reconnect)
 // Set connection params
 router.post('/set_connection', md_options, controller.setConnection)
 
-module.exports = router;
+export default router;

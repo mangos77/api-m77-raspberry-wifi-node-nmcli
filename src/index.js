@@ -1,51 +1,63 @@
-global.__basedir = __dirname
+import http from 'http';
+import dotenv from 'dotenv';
+import parseVariables from 'dotenv-parse-variables';
+import express from 'express';
+import cors from 'cors';
+import allowHosts from './middlewares/allowHosts.middleware.js';
+import { initSocketIO } from './modules/socketio.module.js';
+import api from './routes/api.routes.js';
+import config from './config.js';
 
-const path = require('path')
+// ESM: obtener __dirname y configurar __basedir global
+// import { fileURLToPath } from 'url';
+// const __filename = fileURLToPath(import.meta.url);
+// const __dirname = path.dirname(__filename);
+// global.__basedir = __dirname;
 
-const dotenv = require('dotenv');
-const parseVariables = require('dotenv-parse-variables');
+// dotenv
 dotenv.config({ path: `.env` });
-process.env = parseVariables(process.env)
+process.env = parseVariables(process.env);
 
-if(process.env.NODE_ENV == 'production'){
+if (process.env.NODE_ENV === 'production') {
     let envprod = dotenv.config({ path: '.env.production' });
-    envprod = parseVariables(envprod)
-    process.env = {...process.env, ...envprod}
+    envprod = parseVariables(envprod);
+    process.env = { ...process.env, ...envprod };
 }
 
-const config = require(path.join(__basedir, 'config'))
 
-const express = require('express')
-const app = new express()
+const app = express();
 
+// --- CORS ---
+app.use(cors());
 
-// CORS
-// Habilita cors
-const cors = require('cors')
-app.use(cors())
+// Static
+app.use('/', express.static('public'));
 
-app.use('/', express.static( path.join(__basedir, 'public') ));
+// --- Middlewares ---
+app.use(allowHosts(config.allowHosts).validate);
 
-
-/***************************/
-// Middlewares
-const allowHosts = require(`${__basedir}/middlewares/allowHosts.middleware`) 
-app.use(allowHosts(config.allowHosts).validate)
-
-if(!config.production){
-    const morgan = require('morgan')
-    app.use(morgan('dev'))
+if (!config.production) {
+    const morgan = (await import('morgan')).default;
+    app.use(morgan('dev'));
 }
 
-app.use(express.urlencoded( { extended: false } ))
-app.use(express.json({ limit: '50mb' }))
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json({ limit: '50mb' }));
 
-/***************************/
+// --- Rutas ---
+app.use('/api', api);
 
-const api = require( path.join(__basedir, 'routes', 'api.routes') )
-app.use('/api', api)
+// --- Servidor HTTP ---
+const server = http.createServer(app);
 
-app.listen(config.port, () => {
-    console.log(`API running at http://localhost:${config.port}`)
-})
+// --- Socket.IO ---
+if (process.env.USE_SOCKET_IO) {
+    initSocketIO(server);
+} else {
+    console.log('Socket.IO deshabilitado');
+}
 
+// --- Iniciar API ---
+server.listen(config.port, () => {
+    console.log(`API running at http://localhost:${config.port}`);
+});

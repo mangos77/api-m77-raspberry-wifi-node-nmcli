@@ -1,11 +1,11 @@
-const express = require('express');
-const router = express.Router();
-const path = require('path')
-const config = require(path.join(__basedir, 'config'))
+import { Router } from 'express';
+const router = Router();
+import config from '../config.js';
 
 // Import controller
-const Controller = require( path.join(__basedir, 'controllers', 'eth.controller') )
+import Controller from '../controllers/eth.controller.js'
 const controller = new Controller()
+controller.init()
 
 
 // Middleware options
@@ -29,4 +29,4 @@ router.get('/status', md_options, controller.status)
 router.post('/set_connection', md_options, controller.setConnection)
 
 
-module.exports = router;
+export default router;

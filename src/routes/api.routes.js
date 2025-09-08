@@ -1,23 +1,24 @@
-const express = require('express');
+// src/routes/api.routes.js
+import express from 'express';
+
+import wifi from './wifi.routes.js';
+import eth from './eth.routes.js';
+
 const router = express.Router();
-const path = require('path')
 
 // Wifi routes
-const wifi = require( path.join(__basedir, 'routes', 'wifi.routes') )
-router.use('/wifi', wifi)
+router.use('/wifi', wifi);
 
-// EWthernet routes
-const eth = require( path.join(__basedir, 'routes', 'eth.routes') )
-router.use('/ethernet', eth)
+// Ethernet routes
+router.use('/ethernet', eth);
 
 // Default response
 router.all('*', (req, res) => {
-    res.status(200).json({
-        status: 200,
-        code: 404,
-        message: `The route does not exist (${req.method})`
-    });
+  res.status(200).json({
+    status: 200,
+    code: 404,
+    message: `The route does not exist (${req.method})`,
+  });
 });
 
-
-module.exports = router;
+export default router;

@@ -2,17 +2,54 @@
     Wifi controller
 */
 
+import {M77RaspberryWIFI} from 'm77-raspberry-wifi-node-nmcli'
+import { getSocketIO } from '../modules/socketio.module.js'
+
 class Controller {
     #wifi = null
     #options = {}
     constructor() {
-        const { M77RaspberryWIFI } = require('m77-raspberry-wifi-node-nmcli')
         this.#wifi = new M77RaspberryWIFI()
+    }
+
+    socketioCalls = () => {
+        setInterval(async () => {
+            const io = getSocketIO();
+
+            // Info Wifi
+            const wifistatus = await this.#wifi.status(true)
+            if (wifistatus.success) {
+                try {
+                    io.emit('wifi_status', wifistatus.data);
+                } catch (e) { }
+            }
+
+            // Saved Wifi
+            const wifisaved = await this.#wifi.savedNetworks()
+            if (wifisaved.success) {
+                try {
+                    io.emit('wifi_saved', wifisaved.data);
+                } catch (e) { }
+            }
+        }, 1000)
+
+        setInterval(async () => {
+            const io = getSocketIO();
+
+            // Scan Wifi
+            const wifiscan = await this.#wifi.scan()
+            if (wifiscan.success) {
+                try {
+                    io.emit('wifi_scan', wifiscan.data);
+                } catch (e) { }
+            }
+        }, 5000)
     }
 
     init = async (options = {}) => {
         return new Promise(async (resolve, reject) => {
             const result = await this.#wifi.init(options)
+            this.socketioCalls()
             resolve(result)
         })
     }
@@ -75,4 +112,4 @@ class Controller {
     }
 }
 
-module.exports = Controller
+export default Controller
