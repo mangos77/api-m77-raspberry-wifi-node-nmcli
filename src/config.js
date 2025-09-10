@@ -27,8 +27,8 @@ const config = () => {
     version: pkjson.version,
     production: process.env.NODE_ENV === 'production' ? true : false,
     port: process.env.PORT,
-    use_socket_io: process.USE_SOCKET_IO, // (mismo valor que tenías)
-    allowHosts: process.env.ALLOW_HOSTS.concat(localIPs),
+    use_socket_io: process.env.USE_SOCKET_IO, 
+    allowHosts: ["localhost","127.0.0.1","iface=lo"].concat(process.env.ALLOW_HOSTS.split(',')).concat(localIPs),
     wifi_config: { debugLevel: process.env.DEBUG_LEVEL },
   };
 
