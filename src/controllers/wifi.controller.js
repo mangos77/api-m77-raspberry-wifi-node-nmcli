@@ -16,6 +16,7 @@ class Controller {
     socketioCalls = () => {
         setInterval(async () => {
             if (!this.#bussy) {
+                this.#bussy = true
                 const io = getSocketIO();
 
                 // Info Wifi
@@ -25,7 +26,9 @@ class Controller {
                         io.emit('wifi_status', wifistatus.data);
                     } catch (e) { }
                 }
+                this.#bussy = false
 
+                this.#bussy = true
                 // Saved Wifi
                 const wifisaved = await this.#wifi.savedNetworks()
                 if (wifisaved.success) {
@@ -33,11 +36,13 @@ class Controller {
                         io.emit('wifi_saved', wifisaved.data);
                     } catch (e) { }
                 }
+                this.#bussy = false
             }
         }, 1000)
 
         setInterval(async () => {
             if (!this.#bussy) {
+                this.#bussy = true
                 const io = getSocketIO();
 
                 // Scan Wifi
@@ -47,6 +52,7 @@ class Controller {
                         io.emit('wifi_scan', wifiscan.data);
                     } catch (e) { }
                 }
+                this.#bussy = false
             }
         }, 5000)
     }
