@@ -5,13 +5,13 @@ import config from '../config.js';
 // Import controller
 import Controller from '../controllers/wifi.controller.js'
 const controller = new Controller()
-controller.init()
+controller.init({ ...{}, ...config.wifi_config })
 
 // Middleware options
-async function md_options(req, res, next){
-    const options = {...{}, ...config.wifi_config, ...req.query}
+async function md_options(req, res, next) {
+    const options = { ...{}, ...config.wifi_config, ...req.query }
     const result = await controller.init(options)
-    if(result.success === false){
+    if (result.success === false) {
         return res.json(result)
     } else {
         next()
