@@ -30,6 +30,7 @@ const config = () => {
     use_socket_io: process.env.USE_SOCKET_IO, 
     allowHosts: ["localhost","127.0.0.1","iface=lo"].concat(process.env.ALLOW_HOSTS.split(',')).concat(localIPs),
     wifi_config: { debugLevel: process.env.DEBUG_LEVEL },
+    eth_config: { debugLevel: process.env.DEBUG_LEVEL },
   };
 
   return config;
