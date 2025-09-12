@@ -14,19 +14,30 @@ class Controller {
     }
 
     socketioCalls = () => {
-        setInterval(async () => {
-            if (!this.#bussy) {
-                const io = getSocketIO();
+        const io = getSocketIO();
 
-                // Info Ethernet
-                const eths = await this.#eth.status()
-                if (eths.success) {
-                    try {
-                        io.emit('eth_status', eths.data);
-                    } catch (e) { }
+        const socket_1 = async () => {
+            try {
+                if (!this.#bussy) {
+                    this.#bussy = true
+
+                    // Info Ethernet
+                    const eths = await this.#eth.status()
+                    if (eths.success) {
+                        try {
+                            io.emit('eth_status', eths.data);
+                        } catch (e) { }
+                    }
+
+                    this.#bussy = false
                 }
+            } finally {
+                setTimeout(socket_1, 1000)
             }
-        }, 1000)
+        }
+
+        setTimeout(socket_1, 1)
+
     }
 
     init = async (options = {}) => {

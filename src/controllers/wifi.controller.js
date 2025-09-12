@@ -14,47 +14,56 @@ class Controller {
     }
 
     socketioCalls = () => {
-        setInterval(async () => {
-            if (!this.#bussy) {
-                this.#bussy = true
-                const io = getSocketIO();
+        const io = getSocketIO();
 
-                // Info Wifi
-                const wifistatus = await this.#wifi.status(true)
-                if (wifistatus.success) {
-                    try {
-                        io.emit('wifi_status', wifistatus.data);
-                    } catch (e) { }
-                }
-                this.#bussy = false
+        const socket_1 = async () => {
+            try {
+                if (!this.#bussy) {
+                    this.#bussy = true
 
-                this.#bussy = true
-                // Saved Wifi
-                const wifisaved = await this.#wifi.savedNetworks()
-                if (wifisaved.success) {
-                    try {
-                        io.emit('wifi_saved', wifisaved.data);
-                    } catch (e) { }
+                    // Info Wifi
+                    const wifistatus = await this.#wifi.status(true)
+                    if (wifistatus.success) {
+                        try {
+                            io.emit('wifi_status', wifistatus.data);
+                        } catch (e) { }
+                    }
+                    // Saved Wifi
+                    const wifisaved = await this.#wifi.savedNetworks()
+                    if (wifisaved.success) {
+                        try {
+                            io.emit('wifi_saved', wifisaved.data);
+                        } catch (e) { }
+                    }
+
+                    this.#bussy = false
                 }
-                this.#bussy = false
+            } finally {
+                setTimeout(socket_1, 1000)
             }
-        }, 1000)
+        }
 
-        setInterval(async () => {
-            if (!this.#bussy) {
-                this.#bussy = true
-                const io = getSocketIO();
+        const socket_2 = async () => {
+            try {
+                if (!this.#bussy) {
+                    this.#bussy = true
 
-                // Scan Wifi
-                const wifiscan = await this.#wifi.scan()
-                if (wifiscan.success) {
-                    try {
-                        io.emit('wifi_scan', wifiscan.data);
-                    } catch (e) { }
+                    // Scan Wifi
+                    const wifiscan = await this.#wifi.scan()
+                    if (wifiscan.success) {
+                        try {
+                            io.emit('wifi_scan', wifiscan.data);
+                        } catch (e) { }
+                    }
+
+                    this.#bussy = false
                 }
-                this.#bussy = false
+            } finally {
+                setTimeout(socket_2, 2100)
             }
-        }, 5000)
+        }
+        setTimeout(socket_1, 1)
+        setTimeout(socket_2, 501)
     }
 
     init = async (options = {}) => {
