@@ -1,0 +1,21 @@
+services:
+  api_net:
+    image: api_net
+    container_name: api_net
+    network_mode: host
+    volumes:
+      - "/:/host:ro"
+      - "/run:/run"
+      - "/etc/machine-id:/etc/machine-id:ro"
+    working_dir: /app
+    environment:
+      - PORT=8081                   # Set port api
+      - ALLOW_HOSTS=m77dev.local    # Allow host (hosts CSV)
+      - DEBUG_LEVEL=0               # Use log, 0 (none), .... 2 (complete)
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:$$PORT/api/ || exit 1"]
+      interval: 20s
+      timeout: 5s
+      retries: 3
+      start_period: 15s
