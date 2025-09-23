@@ -1,5 +1,6 @@
 services:
   api_net:
+    init: true
     image: api_net
     container_name: api_net
     network_mode: host
@@ -9,13 +10,19 @@ services:
       - "/etc/machine-id:/etc/machine-id:ro"
     working_dir: /app
     environment:
-      - PORT=8081                   # Set port api
-      - ALLOW_HOSTS=m77dev.local    # Allow host (hosts CSV)
-      - DEBUG_LEVEL=0               # Use log, 0 (none), .... 2 (complete)
+      - PORT=8081                   # Set the port used by the network management API
+      - ALLOW_HOSTS=m77dev.local    # Set the host (or comma-separated hosts) allowed to send requests
+      - DEBUG_LEVEL=0               # Set the logging level: 0 (none) ... 2 (full)
     restart: unless-stopped
+    ulimits:
+      nproc: 8192
+      nofile:
+        soft: 65536
+        hard: 65536
     healthcheck:
-      test: ["CMD-SHELL", "wget -q --spider http://127.0.0.1:$$PORT/api/ || exit 1"]
-      interval: 20s
-      timeout: 5s
-      retries: 3
-      start_period: 15s
+      # *** ADJUST THE HEALTH PORT TO MATCH THE ONE DEFINED ABOVE ***
+      test: ["CMD", "wget", "-q", "--spider", "--tries=1", "--timeout=2", "http://127.0.0.1:8081/api/"]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 60s
